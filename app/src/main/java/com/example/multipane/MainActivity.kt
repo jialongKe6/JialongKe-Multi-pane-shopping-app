@@ -18,10 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.activity.compose.BackHandler
+import androidx.compose.runtime.saveable.rememberSaveable
+import java.io.Serializable
 
 
 // Define Product data class
-data class Product(val name: String, val price: String, val description: String)
+data class Product(val name: String, val price: String, val description: String) : Serializable
 
 @Composable
 fun MultiPaneShoppingApp(modifier: Modifier = Modifier) {
@@ -38,7 +40,7 @@ fun MultiPaneShoppingApp(modifier: Modifier = Modifier) {
         Product("Product I", "$500", "Product I offers exceptional design and build quality.")
     )
 
-    var selectedProduct by remember { mutableStateOf<Product?>(null) }
+    var selectedProduct by rememberSaveable { mutableStateOf<Product?>(null) }
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == 2 // 2 represents landscape mode
